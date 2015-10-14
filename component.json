@@ -1,6 +1,6 @@
 {
   "name": "angular-pricePilot-utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://bitbucket.org/pricepilot/angular-pricepilot-utils",
   "description": "Shared utils for PricePilot' Angular projects",
   "main": "src/angular-facebook-pixel",
