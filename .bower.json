@@ -1,0 +1,29 @@
+{
+  "name": "angular-pricePilot-utils",
+  "homepage": "https://bitbucket.org/pricepilot/angular-pricepilot-utils",
+  "description": "Shared utils for PricePilot' Angular projects",
+  "main": [
+    "src/module.js",
+    "src/directives/ppFbPixel.js",
+    "src/directives/ppOneClick.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "dependencies": {
+    "angular": "~1.3.13"
+  },
+  "_release": "5ce0d5b579",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5ce0d5b57955c93b71bf32ca67693a93f0643000"
+  },
+  "_source": "git@bitbucket.org:pricepilot/angular-pricepilot-utils.git",
+  "_target": "*",
+  "_originalSource": "git@bitbucket.org:pricepilot/angular-pricepilot-utils.git",
+  "_direct": true
+}
