@@ -6,51 +6,49 @@ angular.module('ngPricepilotUtils')
 		restrict: 'A',
 		link: function(scope,element,attrs) {
 			var expression = attrs['ppOneClick'];
-			var disabledClass = attrs['disabled-class'];
-
-			function isStateEnabled() {
-				return !element[0].disabled;
+			var disabledClass = attrs['disabledClass'];
+			
+			function isStateDisabled() {
+				return element[0].disabled;
 			}
 
-			function setDisabledState () {
-				element[0].disabled = true;
-				element.addClass(disabledClass);
-			}
+			function setDisabled(isDisabled) {
+				if (isDisabled) {
+					element.addClass(disabledClass);
+				} else {
+					element.removeClass(disabledClass);
+				}
 
-			function setEnabledState () {
-				element[0].disabled = false;
-				element.removeClass(disabledClass);
+				element[0].disabled = isDisabled;
 			}
 
 			element.on('click', function() {
-				var working = false;
-				
-				if(isStateEnabled()) {
-					working = true;
-					setDisabledState();
+				var isRealStateDisabled = isStateDisabled();
+				setDisabled(true);
 
-					var unregisterWatcher = scope.$watch(isStateEnabled,
-					 function(_isStateEnabled){
-					 	if (_isStateEnabled) {
-					 		if (working) {
-								setDisabledState();
-							} else {
-								unregisterWatcher();
-							}
-					 	}
+				var unregisterWatcher = scope.$watch(isStateDisabled,
+						function(isNewStateDisabled){
+				 	if (!isNewStateDisabled) {
+						setDisabled(true);
+				 	}
+				});
+
+				var unregisterWatcherForNgDisabled = undefined;
+				if (attrs.ngDisabled) {
+					unregisterWatcherForNgDisabled = scope.$watch(attrs.ngDisabled,
+							function(isNewStateDisabled) {
+						isRealStateDisabled = isNewStateDisabled;
 					});
-
-					$q.when(scope.$apply(expression), function () {
-						// success
-						working = false;
-						setEnabledState();
-					}, function () {
-						// error
-						working = false;
-						setEnabledState();
-					});
-
 				}
+
+				$q.when(scope.$apply(expression), function() {
+					unregisterWatcher();
+					setDisabled(isRealStateDisabled);
+
+					if (undefined !== unregisterWatcherForNgDisabled) {
+						unregisterWatcherForNgDisabled();
+					}
+				});
 			});
 		}
 	};
