@@ -15,7 +15,7 @@ angular.module('ngPricepilotUtils')
         link: link,
         restrict: 'EA',
         scope: {
-            pixelID: '@',
+            pixelId: '@',
             ev: '@',
             value: '@',
             currency: '@'
@@ -25,7 +25,7 @@ angular.module('ngPricepilotUtils')
     function link(scope) {
         if (!window._fbq) {
             insertFbScript();
-            fbq('init', scope.pixelID);
+            fbq('init', scope.pixelId);
         }
 
         var ev = scope.ev;
