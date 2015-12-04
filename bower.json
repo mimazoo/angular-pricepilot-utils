@@ -1,6 +1,6 @@
 {
   "name": "angular-pricepilot-utils",
-  "version": "0.2",
+  "version": "0.3",
   "homepage": "https://bitbucket.org/pricepilot/angular-pricepilot-utils",
   "description": "Shared utils for PricePilot' Angular projects",
   "main": [
